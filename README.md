@@ -6,7 +6,7 @@ Normalise border properties on simple table objects.
 ```javascript
 var table = {
     cells: [
-        [
+        [   
             {
                 rowspan: 1,
                 colspan: 1,
@@ -17,26 +17,6 @@ var table = {
                     left: 'solid'
                 }
             },
-            {
-                rowspan: 1,
-                colspan: 1,
-                border: {
-                    top: 'solid',
-                    right: 'solid',
-                    bottom: 'solid',
-                    left: 'solid'
-                }
-            },
-            {
-                rowspan: 1,
-                colspan: 1,
-                border: {
-                    top: 'solid',
-                    right: 'solid',
-                    bottom: 'solid',
-                    left: 'solid'
-                }
-            }, 
             {
                 rowspan: 1,
                 colspan: 1,
@@ -61,16 +41,6 @@ var table = {
             {
                 rowspan: 1,
                 colspan: 1,
-                border: {
-                    top: 'solid',
-                    right: 'solid',
-                    bottom: 'solid',
-                    left: 'solid'
-                }
-            },
-            {
-                rowspan: 1,
-                colspan: 2,
                 border: {
                     top: 'solid',
                     right: 'solid',
