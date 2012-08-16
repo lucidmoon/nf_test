@@ -14,7 +14,11 @@ var NF = {};
                 normaliseBorderValue,
                 validateBorderValues,
                 tableCellsLength,
-                rowLength;
+                rowLength,
+                i,
+                normalisedValue,
+                _row,
+                _col;
 
             validBorderStyles = [
                 ['strong', 'solid'],
@@ -29,8 +33,8 @@ var NF = {};
              * @return {String} normalisedValue - The normalised border value
              */
             normaliseBorderValue = function(borderStyleValue) {
-                var normalisedValue = false;
-                for (var _i = 0; _i < validBorderStyles.length; _i = _i + 1) {
+                normalisedValue = false;
+                for (_i = 0; _i < validBorderStyles.length; _i = _i + 1) {
                     if (validBorderStyles[_i].indexOf(borderStyleValue) >= 0) {
                         normalisedValue = validBorderStyles[_i][0];
                     } 
@@ -56,10 +60,10 @@ var NF = {};
             };
             // First Pass.  Simply normalise values or throw an error.
             tableCellsLength = table.cells.length;
-            for (var _row = 0; _row < tableCellsLength; _row++) {
+            for (_row = 0; _row < tableCellsLength; _row++) {
                 row = table.cells[_row];
-                rowLength = row.length
-                for (var _col = 0; _col < rowLength; _col++) {
+                rowLength = row.length;
+                for (_col = 0; _col < rowLength; _col++) {
                     cell = row[_col];
                     for (position in cell.border) {
                         cell.border[position] = normaliseBorderValue(cell.border[position]);
@@ -67,9 +71,9 @@ var NF = {};
                 }
             }
             // Second Pass. Validate & re-apply border values
-            for (var _row = 0; _row < tableCellsLength; _row++) {
+            for (_row = 0; _row < tableCellsLength; _row++) {
                 row = table.cells[_row];
-                for (var _col = 0; _col < rowLength; _col++) {
+                for (_col = 0; _col < rowLength; _col++) {
                     cell = row[_col];
                     siblings = {
                         top: table.cells[_row - 1] ? table.cells[_row - 1][_col] : null,
@@ -80,7 +84,7 @@ var NF = {};
                     for (position in cell.border) {
                         if (position === 'right' && cell.border[position]) {
                             if (siblings.right && siblings.right.border && siblings.right.border.left) {
-                                siblings.right.border.left = validateBorderValues(siblings.right.border.left, cell.border[position])
+                                siblings.right.border.left = validateBorderValues(siblings.right.border.left, cell.border[position]);
                             }
                             delete cell.border[position];
                         }
@@ -94,5 +98,5 @@ var NF = {};
                 }
             }
             return table;
-        }
+        };
 }());
