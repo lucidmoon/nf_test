@@ -6,7 +6,7 @@
             rowspan: 1,
             colspan: 1,
             border: {
-                top: 'dashed',
+                top: 'normal',
                 right: 'dashed',
                 bottom: 'dashed',
                 left: 'dashed'
@@ -96,15 +96,20 @@
 
     };
 
-
-
     /**
      * Normalise a table's border properties
      * @param {Object} table - The table to be normalised
      * @return {Object} table - The normalised table
      */
     var normaliseTableBorders = function(table) {
-            var row, cell, validBorderStyles;
+            var row, 
+                cell, 
+                siblings,
+                validBorderStyles, 
+                normaliseBorderValue,
+                validateBorderValues,
+                tableCellsLength,
+                rowLength;
 
             validBorderStyles = [
                 ['strong', 'solid'],
@@ -118,61 +123,55 @@
              * @param {String} borderStyleValue - The border value to be normalised
              * @return {String} normalisedValue - The normalised border value
              */
-            var normaliseBorderValue = function(borderStyleValue) {
-                    var normalisedValue = false;
-                    for (var _i = 0; _i < validBorderStyles.length; _i = _i + 1) {
-                        if (validBorderStyles[_i].indexOf(borderStyleValue) > 0) {
-                            normalisedValue = validBorderStyles[_i][0];
-                        } else {
-                            var lastUnmatchedIndexId = validBorderStyles[_i].indexOf(borderStyleValue);
-                        }
-                    }
-
-                    if (normalisedValue) {
-                        return normalisedValue;
-                    } else {
-                        console.log(lastUnmatchedIndexId);
-                        throw new Error("Invalid border type: " + borderStyleValue);
-                    }
-                };
+            normaliseBorderValue = function(borderStyleValue) {
+                var normalisedValue = false;
+                for (var _i = 0; _i < validBorderStyles.length; _i = _i + 1) {
+                    if (validBorderStyles[_i].indexOf(borderStyleValue) >= 0) {
+                        normalisedValue = validBorderStyles[_i][0];
+                    } 
+                }
+                if (normalisedValue) {
+                    return normalisedValue;
+                } else {
+                    throw new Error("Invalid border type: " + borderStyleValue);
+                }
+            };
 
             /**
              * Validate (pre-normalised) adjacent borders values
              * @param {String} borderStyleValue - The border value to be normalised
              * @return {String} normalisedValue - The normalised border value
              */
-            var validateBorderValues = function(target, source) {
-                    if (target === source) {
-                        return target;
-                    } else {
-                        throw new Error("Incompatible types: '" + target + "' and '" + source + "'");
-                    }
-                };
-
+            validateBorderValues = function(target, source) {
+                if (target === source) {
+                    return target;
+                } else {
+                    throw new Error("Incompatible types: '" + target + "' and '" + source + "'");
+                }
+            };
             // First Pass.  Simply normalise values or throw an error.
-            for (var _row = 0; _row < table.cells.length; _row++) {
+            tableCellsLength = table.cells.length;
+            for (var _row = 0; _row < tableCellsLength; _row++) {
                 row = table.cells[_row];
-                for (var _col = 0; _col < row.length; _col++) {
+                rowLength = row.length
+                for (var _col = 0; _col < rowLength; _col++) {
                     cell = row[_col];
                     for (position in cell.border) {
                         cell.border[position] = normaliseBorderValue(cell.border[position]);
                     }
                 }
             }
-
             // Second Pass. Validate & re-apply border values
-            for (var _row = 0; _row < table.cells.length; _row++) {
+            for (var _row = 0; _row < tableCellsLength; _row++) {
                 row = table.cells[_row];
-                for (var _col = 0; _col < row.length; _col++) {
+                for (var _col = 0; _col < rowLength; _col++) {
                     cell = row[_col];
-
-                    var siblings = {
+                    siblings = {
                         top: table.cells[_row - 1] ? table.cells[_row - 1][_col] : null,
                         right: table.cells[_row][_col + 1],
                         bottom: table.cells[_row + 1] ? table.cells[_row + 1][_col] : null,
                         left: table.cells[_row][_col - 1]
                     };
-
                     for (position in cell.border) {
                         if (position === 'right' && cell.border[position]) {
                             if (siblings.right && siblings.right.border && siblings.right.border.left) {
@@ -191,7 +190,5 @@
             }
             return table;
         }
-
     console.log(normaliseTableBorders(table));
-
 }());
