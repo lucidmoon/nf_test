@@ -1,5 +1,7 @@
 # NF.normaliseTableBorders()
 
+[![Build Status](https://secure.travis-ci.org/lucidmoon/nf_test.png?branch=master)](http://travis-ci.org/lucidmoon/nf_test)
+
 Normalise border properties on simple table objects. 
 
 ### Example Table Object
