@@ -95,7 +95,7 @@ var table = {
 $ cd nf_test/
 $ python -m SimpleHTTPServer
 ```
-To run Jasmine tests navigate your browser to:
+##### To run Jasmine tests navigate your browser to:
 ```
 http://localhost:8000/tests/SpecRunner.html
 ```
