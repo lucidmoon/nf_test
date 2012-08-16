@@ -4,10 +4,10 @@ beforeEach(function() {
             rowspan: 1,
             colspan: 1,
             border: {
-                top: 'normal',
-                right: 'dashed',
-                bottom: 'dashed',
-                left: 'dashed'
+                top: 'solid',
+                right: 'solid',
+                bottom: 'solid',
+                left: 'solid'
             }
         }, {
             rowspan: 1,
@@ -16,7 +16,7 @@ beforeEach(function() {
                 top: 'solid',
                 right: 'solid',
                 bottom: 'solid',
-                left: 'dashed'
+                left: 'solid'
             }
         }, {
             rowspan: 1,
@@ -40,7 +40,7 @@ beforeEach(function() {
             rowspan: 1,
             colspan: 1,
             border: {
-                top: 'dashed',
+                top: 'solid',
                 right: 'solid',
                 bottom: 'solid',
                 left: 'solid'
@@ -92,6 +92,5 @@ beforeEach(function() {
             }
         }]]
     };
-    
-    this.normalisedTable = NF.normaliseTableBorders(this.table);
+
 });
