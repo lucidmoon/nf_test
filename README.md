@@ -57,7 +57,8 @@ var table = {
                     bottom: 'solid',
                     left: 'solid'
                 }
-            }, {
+            },
+            {
                 rowspan: 1,
                 colspan: 1,
                 border: {
@@ -66,7 +67,8 @@ var table = {
                     bottom: 'solid',
                     left: 'solid'
                 }
-            }, {
+            },
+            {
                 rowspan: 1,
                 colspan: 2,
                 border: {
