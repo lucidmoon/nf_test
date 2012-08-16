@@ -27,7 +27,29 @@ describe("NF.normaliseTableBorders()", function() {
     });
   });
   
-  describe("Table 3", function() {
+  describe("Table 3 (1 + 2)", function() {
+    beforeEach(function() {
+      this.table.cells[1][0].border.right = 'normal';
+      this.table.cells[1][1].border.left = 'dashed';
+      this.table.cells[1][1].border.bottom = 'solid';
+      this.table.cells[2][1].border.top = 'strong';
+      this.normalisedTable = NF.normaliseTableBorders(this.table);
+    })
+    it("should remove bottom border property", function() {
+      expect(this.normalisedTable.cells[1][1].border.bottom).toBeUndefined();
+    });  
+    it("should normalise valid border property", function() {
+      expect(this.normalisedTable.cells[2][1].border.top).toEqual("strong");      
+    });
+    it("should remove right border property", function() {
+      expect(this.normalisedTable.cells[1][0].border.right).toBeUndefined();
+    });  
+    it("should normalise valid border properties", function() {
+      expect(this.normalisedTable.cells[1][1].border.left).toEqual("normal");      
+    });    
+  });
+
+  describe("Table 4", function() {
     beforeEach(function() {
       this.table.cells[1][1].border.bottom = 'weak';
       this.table.cells[2][2].border.top = 'strong';
@@ -38,7 +60,7 @@ describe("NF.normaliseTableBorders()", function() {
     });  
   });
 
-  describe("Table 4", function() {
+  describe("Table 5", function() {
     beforeEach(function() {
       this.table.cells[1][1].border.bottom = 'kangaroo';
     })
