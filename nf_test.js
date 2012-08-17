@@ -65,9 +65,9 @@ NF.normaliseTableBorders = function(table) {
             cell = row[_col];
             siblings = {
                 top: table.cells[_row - 1] ? table.cells[_row - 1][_col] : null,
-                right: table.cells[_row][_col + 1],
+                right: table.cells[_row][_col + 1] ? table.cells[_row][_col + 1] : null,
                 bottom: table.cells[_row + 1] ? table.cells[_row + 1][_col] : null,
-                left: table.cells[_row][_col - 1]
+                left: table.cells[_row][_col - 1] ? table.cells[_row][_col - 1] : null
             };
             for (position in cell.border) {
                 if (position === 'right' && cell.border[position]) {
