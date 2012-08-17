@@ -6,7 +6,18 @@ var NF = {};
  * @return {Object} table - The normalised table
  */
 NF.normaliseTableBorders = function(table) {
-    var row, cell, siblings, validBorderStyles, normaliseBorderValue, validateBorderValues, tableCellsLength, rowLength, i, normalisedValue, _row, _col;
+    var row, 
+        cell, 
+        siblings, 
+        validBorderStyles, 
+        normaliseBorderValue, 
+        validateBorderValues, 
+        tableCellsLength, 
+        rowLength, 
+        i, 
+        normalisedValue, 
+        _row, 
+        _col;
 
     validBorderStyles = [
         ['strong', 'solid'],
