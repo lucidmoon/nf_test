@@ -70,4 +70,17 @@ describe("NF.normaliseTableBorders()", function() {
     });  
   });
 
+  describe("Table 6", function() {
+    beforeEach(function() {
+      this.table.cells[2][0].border.right = 'weak';
+      this.table.cells[2][1].border.left = 'dotted';
+      this.normalisedTable = NF.normaliseTableBorders(this.table);      
+    })
+    
+    it("should merge valid border properties", function() {
+      expect(this.table.cells[2][1].border.left).toEqual('weak');
+      expect(this.table.cells[2][0].border.right).toBeUndefined();
+    });  
+  });  
+
 }); 
